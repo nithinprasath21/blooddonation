@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation App - Blood Requests</title>
+</head>
+<body>
+    <h1>Blood Donation App - Blood Requests</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Donor Name</th>
+            <th>Blood Group</th>
+            <th>Contact Number</th>
+        </tr>
+        {% for donation in donations %}
+            <tr>
+                <td>{{ donation[0] }}</td>
+                <td>{{ donation[1] }}</td>
+                <td>{{ donation[2] }}</td>
+                <td>{{ donation[3] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
