@@ -26,6 +26,39 @@ cursor.execute('''
 ''')
 conn.commit()
 
+# Route to update donation record
+@app.route('/update/<int:donation_id>', methods=['GET', 'POST'])
+def update(donation_id):
+    if request.method == 'GET':
+        # Retrieve donation details for the selected ID
+        cursor.execute('SELECT * FROM donations WHERE id = %s', (donation_id,))
+        donation = cursor.fetchone()
+        return render_template('update.html', donation=donation)
+    elif request.method == 'POST':
+        # Update donation details in the database
+        donor_name = request.form['donor_name']
+        blood_group = request.form['blood_group']
+        contact_number = request.form['contact_number']
+
+        cursor.execute('''
+            UPDATE donations
+            SET donor_name = %s, blood_group = %s, contact_number = %s
+            WHERE id = %s
+        ''', (donor_name, blood_group, contact_number, donation_id))
+        conn.commit()
+
+        return redirect(url_for('request_blood'))
+
+# Route to delete donation record
+@app.route('/delete/<int:donation_id>')
+def delete(donation_id):
+    # Delete donation record from the database
+    cursor.execute('DELETE FROM donations WHERE id = %s', (donation_id,))
+    conn.commit()
+
+    return redirect(url_for('request_blood'))
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
