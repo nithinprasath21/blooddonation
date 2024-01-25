@@ -24,5 +24,26 @@
             </tr>
         {% endfor %}
     </table>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Donor Name</th>
+            <th>Blood Group</th>
+            <th>Contact Number</th>
+            <th>Action</th>
+        </tr>
+        {% for donation in donations %}
+            <tr>
+                <td>{{ donation[0] }}</td>
+                <td>{{ donation[1] }}</td>
+                <td>{{ donation[2] }}</td>
+                <td>{{ donation[3] }}</td>
+                <td>
+                    <a href="/update/{{ donation[0] }}">Update</a>
+                    <a href="/delete/{{ donation[0] }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
